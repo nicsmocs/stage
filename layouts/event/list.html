@@ -1,0 +1,47 @@
+{{ partial "head.html" . }}
+{{ partial "navbar.html" . }}
+<div class="wrapper">
+  <article>
+    <div class="container">
+      <header>
+        <h1 class="title">{{ .Title }}</h1>
+        <hr />
+      </header>
+
+      {{ $today := now.Format "2006-01-02" }}
+      {{ $upcoming := slice }}
+      {{ $past := slice }}
+      {{ range .Pages }}
+        {{ $eventDate := time.Format "2006-01-02" .Params.event_date }}
+        {{ if ge $eventDate $today }}
+          {{ $upcoming = $upcoming | append . }}
+        {{ else }}
+          {{ $past = $past | append . }}
+        {{ end }}
+      {{ end }}
+
+      <section class="event-list">
+        <h2>{{ i18n "events_upcoming" }}</h2>
+        {{ if gt (len $upcoming) 0 }}
+          {{ range $upcoming.ByParam "event_date" }}
+            {{ .Render "summary" }}
+          {{ end }}
+        {{ else }}
+          <p>{{ i18n "events_none_upcoming" }}</p>
+        {{ end }}
+      </section>
+
+      <section class="event-list">
+        <h2>{{ i18n "events_past" }}</h2>
+        {{ if gt (len $past) 0 }}
+          {{ range $past.ByParam "event_date" }}
+            {{ .Render "summary" }}
+          {{ end }}
+        {{ else }}
+          <p>{{ i18n "events_none_past" }}</p>
+        {{ end }}
+      </section>
+    </div>
+  </article>
+</div>
+{{ partial "footer.html" . }}

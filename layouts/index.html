@@ -48,13 +48,13 @@
 <div class="index-wrapper">
   <div id="main-container" class="container">
     <div class="col-sm-12">
-      <article>
-        <h3>Recent Posts</h3>
-        <hr />
-        {{ range first 5 (where .Site.RegularPages "Section" "post") }}
-          {{ .Render "summary" }}
-        {{ end }}
-      </article>
+      <nav class="home-links" aria-label="Tempest Pier Links">
+        {{ with .Site.Params.social.youtube }}<a href="{{ . }}" target="_blank" rel="noopener">{{ i18n "home_youtube" }}</a>{{ end }}
+        {{ with .Site.Params.social.spotify }}<a href="{{ . }}" target="_blank" rel="noopener">{{ i18n "home_spotify" }}</a>{{ end }}
+        {{ with .Site.Params.social.amazon }}<a href="{{ . }}" target="_blank" rel="noopener">{{ i18n "home_amazon" }}</a>{{ end }}
+        {{ with .Site.Params.social.itunes }}<a href="{{ . }}" target="_blank" rel="noopener">{{ i18n "home_itunes" }}</a>{{ end }}
+        {{ with .Site.Params.social.instagram }}<a href="{{ . }}" target="_blank" rel="noopener">{{ i18n "home_instagram" }}</a>{{ end }}
+      </nav>
     </div>
   </div>
 </div>

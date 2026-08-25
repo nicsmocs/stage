@@ -1,13 +1,8 @@
-    <section class="summary">
-        <img class="street-view avatar" src="http://maps.googleapis.com/maps/api/streetview?size=64x64&location={{ .Params.map.lat }},{{ .Params.map.long }}&fov=90&heading={{ .Params.map.heading }}&pitch=0"></img>
-        <div class="content">
-            <h4 class="title"><a href="{{ .RelPermalink }}" rel="prefetch">{{ .Title }}</a></h4>
-            {{ with .Description }}<h5>{{ . }}</h5>{{ end }}
-            {{ if isset .Params "excerpt" }}
-            <p>{{ .Params.excerpt }}</p>
-            {{ else }}
-            <p>{{ .Summary }}</p>
-            {{ end }}
-        </div>
-        <hr>
-    </section>
+<section class="summary">
+  <div class="content">
+    {{ with .Params.event_date }}
+      <h4 class="title"><a href="{{ $.RelPermalink }}" rel="prefetch">{{ if eq $.Site.Language.Lang "en" }}{{ time.Format "January 2, 2006" . }}{{ else }}{{ time.Format "02.01.2006" . }}{{ end }}: {{ $.Title }}</a></h4>
+    {{ end }}
+  </div>
+  <hr />
+</section>

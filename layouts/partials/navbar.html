@@ -45,7 +45,11 @@
       
       <!-- Brand-Bereich mit Logo-Abfrage -->
       <a class="navbar-brand" href="{{ .Site.BaseURL }}" style="display: flex; align-items: center; padding-top: 5px; padding-bottom: 5px;">
-        {{ with .Site.Params.navbar_logo }}
+        {{ $navbarLogo := .Site.Params.navbar_logo }}
+        {{ if and (not .IsHome) .Site.Params.navbar_logo_dark }}
+          {{ $navbarLogo = .Site.Params.navbar_logo_dark }}
+        {{ end }}
+        {{ with $navbarLogo }}
           <img src="{{ . | relURL }}" alt="{{ $.Site.Params.title | default $.Site.Title }}" style="height: 40px; width: auto; display: block;">
         {{ else }}
           {{ .Site.Params.title | default .Site.Title }}
@@ -55,18 +59,22 @@
 
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        {{ with .Site.Params.navbar.blog }}<li><a href="{{ . }}">Blog</a></li>{{ end }}
-        {{ with .Site.Params.navbar.bio }}<li><a href="{{ . }}">Bio</a></li>{{ end }}
-        {{ with .Site.Params.navbar.music }}<li><a href="{{ . }}">Music</a></li>{{ end }}
-        {{ with .Site.Params.navbar.media }}<li><a href="{{ . }}">Media</a></li>{{ end }}
-        {{ with .Site.Params.navbar.events }}<li><a href="{{ . }}">Events</a></li>{{ end }}
+        {{ with .Site.Params.navbar.bio }}<li><a href="{{ . | relLangURL }}">{{ i18n "nav_bio" }}</a></li>{{ end }}
+        {{ with .Site.Params.navbar.music }}<li><a href="{{ . | relLangURL }}">{{ i18n "nav_music" }}</a></li>{{ end }}
+        {{ with .Site.Params.navbar.booking }}<li><a href="{{ . | relLangURL }}">{{ i18n "nav_booking" }}</a></li>{{ end }}
+        {{ with .Site.Params.navbar.events }}<li><a href="{{ . | relLangURL }}">{{ i18n "nav_events" }}</a></li>{{ end }}
+      </ul>
+      <ul class="nav navbar-nav navbar-right language-switcher">
+        {{ range .Translations }}<li><a href="{{ .RelPermalink }}">{{ .Language.Locale | upper }}</a></li>{{ end }}
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        {{ with .Site.Params.social.facebook }}<li><a href="{{ . }}"><i class="fa fa-facebook"></i></a></li>{{ end }}
-        {{ with .Site.Params.social.twitter }}<li><a href="{{ . }}"><i class="fa fa-twitter"></i></a></li>{{ end }}
-        {{ with .Site.Params.social.soundcloud }}<li><a href="{{ . }}"><i class="fa fa-soundcloud"></i></a></li>{{ end }}
-        {{ with .Site.Params.social.reverbnation }}<li><a href="{{ . }}"><i class="fa fa-star"></i></a></li>{{ end }}
-        {{ with .Site.Params.social.contact }}<li><a href="{{ . }}"><i class="fa fa-envelope"></i></a></li>{{ end }}
+        {{ with .Site.Params.social.instagram }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>{{ end }}
+        {{ with .Site.Params.social.spotify }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Spotify" title="Spotify"><i class="fa fa-spotify"></i></a></li>{{ end }}
+        {{ with .Site.Params.social.amazon }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Amazon Music" title="Amazon Music"><i class="fa fa-amazon"></i></a></li>{{ end }}
+        {{ with .Site.Params.social.youtube }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><i class="fa fa-youtube"></i></a></li>{{ end }}
+        {{ with .Site.Params.social.itunes }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="iTunes" title="iTunes"><i class="fa fa-apple"></i></a></li>{{ end }}
+        {{ with .Site.Params.social.facebook }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>{{ end }}
+        {{ with .Site.Params.social.contact }}<li><a href="{{ . }}" aria-label="Booking per E-Mail" title="Booking per E-Mail"><i class="fa fa-envelope"></i></a></li>{{ end }}
       </ul>
     </div><!--/.nav-collapse -->
   </div>

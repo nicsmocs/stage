@@ -1410,7 +1410,7 @@ body {
   font-size: 16px;
   line-height: 1.428571429;
   color: #333333;
-  background-color: #fff;
+  background-color: #f2f2f2;
 }
 
 /* line 36, ../../../../../../.rvm/gems/ruby-2.1.2/gems/bootstrap-sass-3.2.0.2/assets/stylesheets/bootstrap/_scaffolding.scss */
@@ -8429,4 +8429,40 @@ body {
 /* line 30, ../sass/styles.scss */
 pre code {
   font-size: 14px;
+}
+
+.home-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em 2em;
+  padding: 2em 0;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.home-links a {
+  color: inherit;
+  font-weight: 500;
+}
+
+.home-links a:hover,
+.home-links a:focus {
+  color: #23527c;
+}
+
+.event-flyer {
+  margin: 0 0 2em;
+}
+
+.event-flyer img {
+  margin: 0 auto;
+}
+
+.event-map {
+  margin: 0 auto 1em;
+}
+
+.event-description {
+  margin-bottom: 2em;
 }

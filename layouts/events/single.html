@@ -1,0 +1,73 @@
+{{ partial "head.html" . }}
+{{ partial "navbar.html" . }}
+{{ $author := .Params.author }}
+
+<div class="wrapper">
+  <!-- Maps/Cover Background Handling -->
+  {{ $mapsEnabled := or (eq .Site.Params.maps "true") (eq .Site.Params.maps true) }}
+  {{ if and $mapsEnabled .Params.map }}
+    <div class="article-map" data-stellar-background-ratio="0.25" data-stellar-vertical-offset="1200" style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?center={{ .Params.map.lat }},{{ .Params.map.long }}&zoom={{ .Params.map.zoom }}&size=1680x400&scale=2')"></div>
+  {{ else }}
+    {{ with .Params.coverphoto }}
+      <div class="article-map" data-stellar-background-ratio="0.25" data-stellar-vertical-offset="1200" style="background-image: url('{{ . | relURL }}')"></div>
+    {{ end }}
+  {{ end }}
+
+  <article id="main-container-event">
+    <header class="container article-header">
+      <h1 class="title">{{ .Title }}</h1>
+      {{ with .Description }}<h4 class="subtitle">{{ . }}</h4>{{ end }}
+      <hr />
+    </header>
+
+    <section class="container article-content">
+      <div class="article-sidebar col-sm-3">
+        <ul class="sidebar-info">
+          {{ if and $mapsEnabled .Params.map }}
+            <li>
+              <img class="street-view img-thumbnail" src="https://maps.googleapis.com/maps/api/streetview?size=300x300&location={{ .Params.map.lat }},{{ .Params.map.long }}&fov=90&heading={{ .Params.map.heading }}&pitch=0" alt="Location Map">
+            </li>
+          {{ else }}
+            <!-- Korrigierter Scoping-Fehler: .Params.smallphoto direkt oder fallback auf .Params.event.photo -->
+            {{ with .Params.smallphoto }}
+              <li>
+                <img class="street-view img-thumbnail" src="{{ . | relURL }}" alt="Event Photo">
+              </li>
+            {{ else }}
+              {{ with .Params.event }}
+                {{ with .photo }}
+                  <li>
+                    <img class="street-view img-thumbnail" src="{{ . | relURL }}" alt="Event Photo">
+                  </li>
+                {{ end }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+
+          {{ with .Params.event }}
+            {{ with .location }}<li><h3>{{ . }}</h3></li>{{ end }}
+            {{ with .time }}<li class="text-muted"><time>{{ . }}</time></li>{{ end }}
+          {{ end }}
+          {{ with .Params.event_date }}
+            <li class="text-muted">
+              <time>{{ if eq $.Site.Language.Lang "en" }}{{ time.Format "January 2, 2006" . }}{{ else }}{{ time.Format "02.01.2006" . }}{{ end }}</time>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+
+      <div class="col-sm-9">
+        {{ with .Params.flyer }}
+          <figure class="event-flyer">
+            <img class="img-responsive" src="{{ . | relURL }}" alt="Flyer für {{ $.Title }}">
+          </figure>
+        {{ end }}
+        {{ .Content }}
+      </div>
+    </section>
+
+    {{ partial "articlefooter.html" . }}
+  </article>
+</div>
+
+{{ partial "footer.html" . }}
