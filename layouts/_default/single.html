@@ -1,8 +1,26 @@
 {{ partial "head.html" . }}
 {{ partial "navbar.html" . }}
+{{ $isAlbum := eq .Section "album" }}
+{{ if $isAlbum }}
+<style>
+  .music-single-cover,
+  .music-single-cover:before {
+    height: 90vh;
+    min-height: 420px;
+  }
+
+  .music-single-cover {
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+  }
+
+</style>
+{{ end }}
 <div class="wrapper">
   {{ with .Params.coverimage }}
-    <div class="article-cover" data-stellar-background-ratio="0.25" style="background-image: url({{ . }})"></div>
+    <div class="article-cover{{ if $isAlbum }} music-single-cover{{ end }}"{{ if not $isAlbum }} data-stellar-background-ratio="0.25"{{ end }} style="background-image: url({{ . }})"></div>
   {{ end }}
   <article id="main-container" >
     {{ partial "articleheader.html" . }}

@@ -1,0 +1,3 @@
+{{- $imprint := .Site.Params.imprint -}}
+{{- $field := .Get 0 -}}
+{{- with index $imprint $field -}}{{ . }}{{- end -}}

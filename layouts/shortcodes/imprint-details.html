@@ -1,0 +1,52 @@
+{{- $imprint := .Site.Params.imprint -}}
+{{- if eq .Page.Language.Lang "en" -}}
+<details class="imprint-details">
+  <summary class="btn btn-default" role="button">Show contact details</summary>
+  <div class="imprint-details-content">
+    <p><strong>{{ index $imprint "name" }}</strong><br>
+    {{ index $imprint "street" }}<br>
+    {{ index $imprint "postal_code" }} {{ index $imprint "city" }}<br>
+    {{ index $imprint "country" }}</p>
+
+    <h2>Contact</h2>
+    <p>E-mail: <a href="mailto:{{ index $imprint "email" }}">{{ index $imprint "email" }}</a></p>
+
+    <h2>Responsible for content</h2>
+    <p>{{ index $imprint "name" }}<br>
+    {{ index $imprint "street" }}<br>
+    {{ index $imprint "postal_code" }} {{ index $imprint "city" }}</p>
+
+    <h2>Social Media Profiles</h2>
+    <p>This legal notice also applies to the band's following social media profiles:</p>
+    <ul>
+      {{ with .Site.Params.social.instagram }}<li><a href="{{ . }}" target="_blank" rel="noopener">Instagram</a></li>{{ end }}
+      {{ with .Site.Params.social.youtube }}<li><a href="{{ . }}" target="_blank" rel="noopener">YouTube</a></li>{{ end }}
+    </ul>
+  </div>
+</details>
+{{- else -}}
+<details class="imprint-details">
+  <summary class="btn btn-default" role="button">Kontaktdaten anzeigen</summary>
+  <div class="imprint-details-content">
+    <p><strong>{{ index $imprint "name" }}</strong><br>
+    {{ index $imprint "street" }}<br>
+    {{ index $imprint "postal_code" }} {{ index $imprint "city" }}<br>
+    {{ index $imprint "country" }}</p>
+
+    <h2>Kontakt</h2>
+    <p>E-Mail: <a href="mailto:{{ index $imprint "email" }}">{{ index $imprint "email" }}</a></p>
+
+    <h2>Verantwortlich für den Inhalt</h2>
+    <p>{{ index $imprint "name" }}<br>
+    {{ index $imprint "street" }}<br>
+    {{ index $imprint "postal_code" }} {{ index $imprint "city" }}</p>
+
+    <h2>Social Media Präsenzen</h2>
+    <p>Dieses Impressum gilt auch für folgende Social-Media-Profile der Band:</p>
+    <ul>
+      {{ with .Site.Params.social.instagram }}<li><a href="{{ . }}" target="_blank" rel="noopener">Instagram</a></li>{{ end }}
+      {{ with .Site.Params.social.youtube }}<li><a href="{{ . }}" target="_blank" rel="noopener">YouTube</a></li>{{ end }}
+    </ul>
+  </div>
+</details>
+{{- end -}}

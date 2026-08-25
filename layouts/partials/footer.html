@@ -15,7 +15,8 @@
       <!-- Copyright -->
       <div class="footer-copyright">
         <p id="footer-info" style="margin: 0; padding: 0; line-height: 1.4;">
-          &copy; {{ now.Format "2006" }} {{ .Site.Params.copyright_holder | default .Site.Title }}. Alle Rechte vorbehalten.
+          &copy; {{ now.Format "2006" }} {{ .Site.Params.copyright_holder | default .Site.Title }}. {{ if eq .Site.Language.Lang "en" }}All rights reserved.{{ else }}Alle Rechte vorbehalten.{{ end }}
+          <br><a href="{{ "impressum/" | relLangURL }}">{{ i18n "nav_imprint" }}</a>
         </p>
       </div>
 

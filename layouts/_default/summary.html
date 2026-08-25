@@ -1,17 +1,26 @@
     {{ $author := .Params.author }}
-    {{ range $element := .Site.Params.authors }}
-      {{ if eq $element.name $author }}
+    {{ $isAlbum := eq .Section "album" }}
     <section class="summary">
-        <img src="{{ $element.image }}" class="avatar">
-      {{ end }}
-    {{ end }}
+        {{ if $isAlbum }}
+          {{ with .Params.album.image }}<img src="{{ . | relURL }}" alt="{{ $.Title }}" class="avatar">{{ end }}
+        {{ else }}
+          {{ range $element := .Site.Params.authors }}
+            {{ if eq $element.name $author }}<img src="{{ $element.image }}" alt="{{ $element.name }}" class="avatar">{{ end }}
+          {{ end }}
+        {{ end }}
         <div class="content">
             <h4 class="title"><a href="{{ .RelPermalink }}" rel="prefetch">{{ .Title }}</a></h4>
-          {{ with .Description }}<h5 class="subtitle">{{ . }}</h5>{{ end }}
-          {{ if isset .Params "excerpt" }}
-            <p>{{ .Params.excerpt }}</p>
+          {{ if $isAlbum }}
+            {{ with .Params.album.description }}<h5 class="subtitle">{{ . }}</h5>{{ end }}
           {{ else }}
-            <p>{{ .Summary }}</p>
+            {{ with .Description }}<h5 class="subtitle">{{ . }}</h5>{{ end }}
+          {{ end }}
+          {{ if not $isAlbum }}
+            {{ if isset .Params "excerpt" }}
+              <p>{{ .Params.excerpt }}</p>
+            {{ else }}
+              <p>{{ .Summary }}</p>
+            {{ end }}
           {{ end }}
 
           <div class="meta">
@@ -20,7 +29,7 @@
               Written By <a href="{{ $element.link }}"><address>{{ $element.name }}</address></a> &mdash;
           {{ end }}
         {{ end }}
-              <time pubdate datetime="{{ .Date.Format "2006-01-02" }}" title="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+              <time pubdate datetime="{{ .Date.Format "2006-01-02" }}" title="{{ if $isAlbum }}{{ .Params.album.year }}{{ else }}{{ .Date.Format "2006-01-02" }}{{ end }}">{{ if $isAlbum }}{{ .Params.album.year }}{{ else }}{{ .Date.Format "January 2, 2006" }}{{ end }}</time>
           </div>
         </div>
         <hr />

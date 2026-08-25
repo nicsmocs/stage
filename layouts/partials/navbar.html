@@ -1,7 +1,7 @@
 <style>
   /* Verhindert den weißen Hintergrund auf mobilen Displays */
   .navbar-default {
-    background-color: transparent !important;
+    background-color: {{ if or .IsHome (eq .Section "album") }}transparent{{ else }}#fff{{ end }} !important;
     border-color: transparent !important;
   }
 
@@ -46,7 +46,7 @@
       <!-- Brand-Bereich mit Logo-Abfrage -->
       <a class="navbar-brand" href="{{ .Site.BaseURL }}" style="display: flex; align-items: center; padding-top: 5px; padding-bottom: 5px;">
         {{ $navbarLogo := .Site.Params.navbar_logo }}
-        {{ if and (not .IsHome) .Site.Params.navbar_logo_dark }}
+        {{ if and (not .IsHome) (ne .Section "album") .Site.Params.navbar_logo_dark }}
           {{ $navbarLogo = .Site.Params.navbar_logo_dark }}
         {{ end }}
         {{ with $navbarLogo }}
