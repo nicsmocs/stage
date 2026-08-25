@@ -1,9 +1,62 @@
-    <footer id="site-footer">
-      <div class="container-fluid">
-        <div class="col-sm-12 text-muted">
-          <p id="footer-info" >Made with <i class='fa fa-heart-o'></i> by <a href="http://noahlange.com">Noah Lange</a>. Powered by <a href="http://hugo.spf13.com">Hugo</a>.</p>
-        </div>
+<footer id="site-footer" style="padding: 20px 0; background-color: transparent;">
+  <div class="container-fluid">
+    <div class="footer-container">
+      
+      <!-- Logo -->
+      <div class="footer-brand">
+        {{ with .Site.Params.footer_logo }}
+          <img src="{{ . | relURL }}" 
+               alt="{{ $.Site.Params.copyright_holder | default $.Site.Title }}" 
+               class="footer-logo" 
+               style="height: 45px; width: auto; max-width: 200px; display: block;">
+        {{ end }}
       </div>
-    </footer>
-  </body>
+
+      <!-- Copyright -->
+      <div class="footer-copyright">
+        <p id="footer-info" style="margin: 0; padding: 0; line-height: 1.4;">
+          &copy; {{ now.Format "2006" }} {{ .Site.Params.copyright_holder | default .Site.Title }}. Alle Rechte vorbehalten.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .footer-brand, 
+  .footer-copyright {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Responsive Anpassung für Mobilgeräte (unter 768px) */
+  @media (max-width: 767px) {
+    .footer-container {
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .footer-brand, 
+    .footer-copyright {
+      justify-content: center;
+      width: 100%;
+    }
+
+    #footer-info {
+      text-align: center !important;
+    }
+  }
+</style>
+</body>
 </html>

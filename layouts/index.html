@@ -1,22 +1,62 @@
 {{ partial "head.html" . }}
 {{ partial "navbar.html" . }}
-{{ with .Site.Params.coverimage }}<div id="cover-page" data-stellar-background-ratio="0.25" style="background-image: url({{ . }})">{{ end }}
-  <div class="container">
-    {{ with .Site.Params.title }}<h1 class="cover-title">{{ . }}</h1>{{ end }}
-    {{ with .Site.Params.subtitle }}<h3 class="cover-subtitle">{{ . }}</h3>{{ end }}
+
+{{ with .Site.Params.coverimage }}
+  {{ $coverDesktop := . | relURL }}
+  {{ $coverMobile := $.Site.Params.coverimage_mobile | default . | relURL }}
+
+  <style>
+    /* Desktop-Hintergrund */
+    #cover-page {
+      background-image: url('{{ $coverDesktop }}') !important;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      height: 100vh; /* Exakte 100% der Viewport-Höhe */
+    }
+
+    /* Smartphone-Hintergrund (bis 768px Displaybreite) */
+    @media (max-width: 768px) {
+      #cover-page {
+        background-image: url('{{ $coverMobile }}') !important;
+        background-position: center top; /* Richtet Hochkant-Bilder oben/mittig aus */
+      }
+    }
+  </style>
+
+  <!-- Vertikal unten ausgerichtet mit 12vh Abstand = schiebt Inhalt weiter nach unten -->
+  <div id="cover-page" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 8vh; box-sizing: border-box;">
+    <div class="container text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
+      
+      <!-- Cover-Logo (vergrößert auf 240px Höhe) -->
+      {{ if $.Site.Params.cover_logo }}
+        <div class="cover-logo-wrapper" style="margin-bottom: 15px; text-align: center; width: 100%;">
+          <img src="{{ $.Site.Params.cover_logo | relURL }}" 
+               alt="{{ $.Site.Params.title | default $.Site.Title }}" 
+               class="cover-logo" 
+               style="height: 250px; width: auto; max-width: 95%; display: inline-block; margin: 0 auto;">
+        </div>
+      {{ else }}
+        {{ with $.Site.Params.title }}<h1 class="cover-title" style="margin-top: 0;">{{ . }}</h1>{{ end }}
+      {{ end }}
+
+      {{ with $.Site.Params.subtitle }}<h3 class="cover-subtitle" style="margin: 0; text-align: center;">{{ . }}</h3>{{ end }}
+    </div>
   </div>
-</div>
+{{ end }}
+
 <div class="index-wrapper">
   <div id="main-container" class="container">
     <div class="col-sm-12">
       <article>
         <h3>Recent Posts</h3>
         <hr />
-        {{ range first 5 (where .Data.Pages "Section" "post") }}
-           {{ .Render "summary"}}
+        {{ range first 5 (where .Site.RegularPages "Section" "post") }}
+          {{ .Render "summary" }}
         {{ end }}
       </article>
     </div>
   </div>
 </div>
+
 {{ partial "footer.html" . }}
