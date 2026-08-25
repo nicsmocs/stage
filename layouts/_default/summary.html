@@ -1,5 +1,5 @@
     {{ $author := .Params.author }}
-    {{ $isAlbum := eq .Section "album" }}
+    {{ $isAlbum := eq .Section "music" }}
     <section class="summary">
         {{ if $isAlbum }}
           {{ with .Params.album.image }}<img src="{{ . | relURL }}" alt="{{ $.Title }}" class="avatar">{{ end }}

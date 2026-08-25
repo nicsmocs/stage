@@ -1,7 +1,7 @@
 {{ partial "head.html" . }}
 {{ partial "navbar.html" . }}
-{{ $isAlbum := eq .Section "album" }}
-{{ if $isAlbum }}
+{{ $isMusic := eq .Section "music" }}
+{{ if $isMusic }}
 <style>
   .music-single-cover,
   .music-single-cover:before {
@@ -20,7 +20,7 @@
 {{ end }}
 <div class="wrapper">
   {{ with .Params.coverimage }}
-    <div class="article-cover{{ if $isAlbum }} music-single-cover{{ end }}"{{ if not $isAlbum }} data-stellar-background-ratio="0.25"{{ end }} style="background-image: url({{ . }})"></div>
+    <div class="article-cover{{ if $isMusic }} music-single-cover{{ end }}"{{ if not $isMusic }} data-stellar-background-ratio="0.25"{{ end }} style="background-image: url({{ . }})"></div>
   {{ end }}
   <article id="main-container" >
     {{ partial "articleheader.html" . }}

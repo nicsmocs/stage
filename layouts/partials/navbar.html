@@ -1,6 +1,6 @@
 {{ $navbarTheme := .Params.navbar_theme | default "" }}
 {{ if not $navbarTheme }}
-  {{ if or .IsHome (and (eq .Section "album") .IsPage) }}
+  {{ if or .IsHome (and (eq .Section "music") .IsPage) }}
     {{ $navbarTheme = "light" }}
   {{ else }}
     {{ $navbarTheme = "dark" }}
@@ -10,7 +10,7 @@
 <style>
   /* Verhindert den weißen Hintergrund auf mobilen Displays */
   .navbar-default {
-    background-color: {{ if or .IsHome (and (eq .Section "album") .IsPage) }}transparent{{ else }}#fff{{ end }} !important;
+    background-color: {{ if or .IsHome (and (eq .Section "music") .IsPage) }}transparent{{ else }}#fff{{ end }} !important;
     border-color: transparent !important;
   }
 

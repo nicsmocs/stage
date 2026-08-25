@@ -119,7 +119,7 @@ params:
   navbar:
     blog: "/post/"
     bio: "/"
-    music: "/album/"
+    music: "/music/"
     events: "/event/"
     media: "/media/"
 

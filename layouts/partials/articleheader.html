@@ -8,7 +8,7 @@
     {{ end }}
   {{ end }}
       {{ if ne .Params.show_date false }}
-        {{ if eq .Section "album" }}
+        {{ if eq .Section "music" }}
         <time pubdate datetime="{{ .Params.album.year }}" title="{{ .Params.album.year }}">{{ .Params.album.year }}</time>
         {{ else }}
         <time pubdate datetime="{{ .Date.Format "2006-01-02" }}" title="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 02, 2006" }}</time>
