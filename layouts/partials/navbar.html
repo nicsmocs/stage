@@ -1,8 +1,37 @@
+{{ $navbarTheme := .Params.navbar_theme | default "" }}
+{{ if not $navbarTheme }}
+  {{ if or .IsHome (and (eq .Section "album") .IsPage) }}
+    {{ $navbarTheme = "light" }}
+  {{ else }}
+    {{ $navbarTheme = "dark" }}
+  {{ end }}
+{{ end }}
+
 <style>
   /* Verhindert den weißen Hintergrund auf mobilen Displays */
   .navbar-default {
-    background-color: {{ if or .IsHome (eq .Section "album") }}transparent{{ else }}#fff{{ end }} !important;
+    background-color: {{ if or .IsHome (and (eq .Section "album") .IsPage) }}transparent{{ else }}#fff{{ end }} !important;
     border-color: transparent !important;
+  }
+
+  .navbar-theme-light .navbar-nav > li > a,
+  .navbar-theme-light .navbar-brand {
+    color: #fff !important;
+  }
+
+  .navbar-theme-light .navbar-nav > li > a:hover,
+  .navbar-theme-light .navbar-nav > li > a:focus {
+    color: #ddd !important;
+  }
+
+  .navbar-theme-dark .navbar-nav > li > a,
+  .navbar-theme-dark .navbar-brand {
+    color: #777 !important;
+  }
+
+  .navbar-theme-dark .navbar-nav > li > a:hover,
+  .navbar-theme-dark .navbar-nav > li > a:focus {
+    color: #333 !important;
   }
 
   @media (max-width: 767px) {
@@ -33,7 +62,7 @@
   }
 </style>
 
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="navbar navbar-default navbar-fixed-top navbar-theme-{{ $navbarTheme }}" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -46,7 +75,7 @@
       <!-- Brand-Bereich mit Logo-Abfrage -->
       <a class="navbar-brand" href="{{ .Site.BaseURL }}" style="display: flex; align-items: center; padding-top: 5px; padding-bottom: 5px;">
         {{ $navbarLogo := .Site.Params.navbar_logo }}
-        {{ if and (not .IsHome) (ne .Section "album") .Site.Params.navbar_logo_dark }}
+        {{ if and (eq $navbarTheme "dark") .Site.Params.navbar_logo_dark }}
           {{ $navbarLogo = .Site.Params.navbar_logo_dark }}
         {{ end }}
         {{ with $navbarLogo }}

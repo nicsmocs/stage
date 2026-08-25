@@ -4,18 +4,19 @@
 <style>
   .music-single-cover,
   .music-single-cover:before {
-    height: calc(100vh - 60px);
+    height: 90vh;
     min-height: 420px;
   }
 
-  @media (max-width: 767px) {
-    .music-single-cover {
-      background-attachment: scroll;
-    }
+  .music-single-cover {
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
   }
 </style>
 <div class="wrapper">
-  {{ with .Params.coverimage }}<div class="article-cover music-single-cover" data-stellar-background-ratio="0.25" style="background-image: url({{ . }})"></div>{{ end }}
+  {{ with .Params.coverimage }}<div class="article-cover music-single-cover" style="background-image: url({{ . }})"></div>{{ end }}
   <article id="main-container" >
     <header class="container article-header">
         <h1 class="title">{{ .Title }}</h1>
@@ -36,7 +37,8 @@
           <ul class="sidebar-purchase">
             {{ with .Params.purchase.itunes }}<li><a href="{{ . }}"><i class="fa fa-apple"></i></a></li>{{ end }}
             {{ with .Params.purchase.google }}<li><a href="{{ . }}"><i class="fa fa-google"></i></a></li>{{ end }}
-            {{ with .Params.purchase.amazon }}<li><a href="{{ . }}">a</a></li>{{ end }}
+            {{ with .Params.purchase.spotify }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Spotify" title="Spotify"><i class="fa fa-spotify"></i></a></li>{{ end }}
+            {{ with .Params.purchase.amazon }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Amazon Music" title="Amazon Music"><i class="fa fa-amazon"></i></a></li>{{ end }}
           </ul>
       </div>
       <div class="col-sm-9">

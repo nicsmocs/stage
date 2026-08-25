@@ -1,8 +1,31 @@
 {{ partial "head.html" . }}
 {{ partial "navbar.html" . }}
 {{ $author := .Params.author }}
+<style>
+  .music-single-cover,
+  .music-single-cover:before {
+    height: 90vh;
+    min-height: 420px;
+  }
+
+  .music-single-cover {
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+  }
+
+  .sidebar-purchase a {
+    color: #777;
+  }
+
+  .sidebar-purchase a:hover,
+  .sidebar-purchase a:focus {
+    color: #333;
+  }
+</style>
 <div class="wrapper">
-  {{ with .Params.coverimage }}<div class="article-cover" data-stellar-background-ratio="0.25" style="background-image: url({{ . }})"></div>{{ end }}
+  {{ with .Params.coverimage }}<div class="article-cover music-single-cover" style="background-image: url({{ . }})"></div>{{ end }}
   <article id="main-container" >
     <header class="container article-header">
         <h1 class="title">{{ .Title }}</h1>
@@ -12,18 +35,19 @@
     <section class="container article-content">
       <div class="article-sidebar col-sm-3">
           <ul class="sidebar-info">
-            {{ with .Params.album.image }}<li><img class="album-image" src="{{ . }}"></img></li>{{ end }}
+            {{ with .Params.album.image }}<li><img class="album-image" src="{{ . | relURL }}" alt="{{ $.Title }}"></li>{{ end }}
             {{ range $element := .Site.Params.authors }}
               {{ if eq $element.name $author }}
             <li class="text-muted">by <a href="{{ $element.link }}">{{ $element.name }}</a></li>
               {{ end}}
             {{ end }}
-            <li class="text-muted"><time pubdate datetime="{{ .Date.Format "2006-01-02" }}" title="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time></li>
+            <li class="text-muted"><time pubdate datetime="{{ .Params.album.year }}" title="{{ .Params.album.year }}">{{ .Params.album.year }}</time></li>
           </ul>
           <ul class="sidebar-purchase">
             {{ with .Params.purchase.itunes }}<li><a href="{{ . }}"><i class="fa fa-apple"></i></a></li>{{ end }}
             {{ with .Params.purchase.google }}<li><a href="{{ . }}"><i class="fa fa-google"></i></a></li>{{ end }}
-            {{ with .Params.purchase.amazon }}<li><a href="{{ . }}">a</a></li>{{ end }}
+            {{ with .Params.purchase.spotify }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Spotify" title="Spotify"><i class="fa fa-spotify"></i></a></li>{{ end }}
+            {{ with .Params.purchase.amazon }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Amazon Music" title="Amazon Music"><i class="fa fa-amazon"></i></a></li>{{ end }}
           </ul>
       </div>
       <div class="col-sm-9">
