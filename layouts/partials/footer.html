@@ -20,13 +20,23 @@
             <span class="footer-sponsors-label">{{ $label }}</span>
             {{ range . }}
               {{ $sponsor := . }}
-              <a href="{{ $sponsor.url | default "#" }}" class="footer-sponsor" target="{{ if $sponsor.url }}_blank{{ end }}" rel="noopener noreferrer" aria-label="{{ $sponsor.name | default "Sponsor" }}">
-                {{ with $sponsor.image }}
-                  <img src="{{ . | relURL }}" alt="{{ $sponsor.name | default "Sponsor" }}" />
-                {{ else }}
-                  <span>{{ $sponsor.name | default "Sponsor" }}</span>
-                {{ end }}
-              </a>
+              {{ if $sponsor.url }}
+                <a href="{{ $sponsor.url }}" class="footer-sponsor" target="_blank" rel="noopener noreferrer" aria-label="{{ $sponsor.name | default "Sponsor" }}">
+                  {{ with $sponsor.image }}
+                    <img src="{{ . | relURL }}" alt="{{ $sponsor.name | default "Sponsor" }}" />
+                  {{ else }}
+                    <span>{{ $sponsor.name | default "Sponsor" }}</span>
+                  {{ end }}
+                </a>
+              {{ else }}
+                <div class="footer-sponsor" aria-label="{{ $sponsor.name | default "Sponsor" }}">
+                  {{ with $sponsor.image }}
+                    <img src="{{ . | relURL }}" alt="{{ $sponsor.name | default "Sponsor" }}" />
+                  {{ else }}
+                    <span>{{ $sponsor.name | default "Sponsor" }}</span>
+                  {{ end }}
+                </div>
+              {{ end }}
             {{ end }}
           </div>
         </div>
