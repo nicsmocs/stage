@@ -50,11 +50,33 @@
     <div class="col-sm-12">
       <nav class="home-links" aria-label="Tempest Pier Links">
         {{ with .Site.Params.social.youtube }}<a href="{{ . }}" target="_blank" rel="noopener">{{ i18n "home_youtube" }}</a>{{ end }}
+        {{ with .Site.Params.social.youtube_music }}<a href="{{ . }}" target="_blank" rel="noopener">YouTube Music</a>{{ end }}
         {{ with .Site.Params.social.spotify }}<a href="{{ . }}" target="_blank" rel="noopener">{{ i18n "home_spotify" }}</a>{{ end }}
+        {{ with .Site.Params.social.tidal }}<a href="{{ . }}" target="_blank" rel="noopener">Tidal</a>{{ end }}
+        {{ with .Site.Params.social.deezer }}<a href="{{ . }}" target="_blank" rel="noopener">Deezer</a>{{ end }}
         {{ with .Site.Params.social.amazon }}<a href="{{ . }}" target="_blank" rel="noopener">{{ i18n "home_amazon" }}</a>{{ end }}
         {{ with .Site.Params.social.itunes }}<a href="{{ . }}" target="_blank" rel="noopener">{{ i18n "home_itunes" }}</a>{{ end }}
         {{ with .Site.Params.social.instagram }}<a href="{{ . }}" target="_blank" rel="noopener">{{ i18n "home_instagram" }}</a>{{ end }}
       </nav>
+
+      {{ with .Site.Params.spotify_embed }}
+        <div style="display: flex; justify-content: center; margin: 30px 0 10px;">
+          <div style="width: min(100%, 420px);">
+            <iframe
+              data-testid="embed-iframe"
+              style="border-radius: 12px; display: block; width: 100%; max-width: 100%;"
+              src="{{ . }}"
+              width="100%"
+              height="352"
+              frameBorder="0"
+              allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              title="Spotify-Embed">
+            </iframe>
+          </div>
+        </div>
+      {{ end }}
     </div>
   </div>
 </div>

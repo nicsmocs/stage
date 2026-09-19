@@ -9,8 +9,9 @@
       </header>
 
       {{ $today := now }}
-      {{ $upcoming := where .Pages "Params.event_date" ">=" $today }}
-      {{ $past := where .Pages "Params.event_date" "<" $today }}
+      {{ $publishedPages := where .Pages "Params.draft" "ne" true }}
+      {{ $upcoming := where $publishedPages "Params.event_date" ">=" $today }}
+      {{ $past := where $publishedPages "Params.event_date" "<" $today }}
 
       <section class="event-list">
         <h2>{{ i18n "events_upcoming" }}</h2>

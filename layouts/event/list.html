@@ -9,9 +9,10 @@
       </header>
 
       {{ $today := now.Format "2006-01-02" }}
+      {{ $publishedPages := where .Pages "Params.draft" "ne" true }}
       {{ $upcoming := slice }}
       {{ $past := slice }}
-      {{ range .Pages }}
+      {{ range $publishedPages }}
         {{ $eventDate := time.Format "2006-01-02" .Params.event_date }}
         {{ if ge $eventDate $today }}
           {{ $upcoming = $upcoming | append . }}

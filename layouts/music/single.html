@@ -44,9 +44,12 @@
             <li class="text-muted"><time pubdate datetime="{{ .Params.album.year }}" title="{{ .Params.album.year }}">{{ .Params.album.year }}</time></li>
           </ul>
           <ul class="sidebar-purchase">
-            {{ with .Params.purchase.itunes }}<li><a href="{{ . }}"><i class="fa fa-apple"></i></a></li>{{ end }}
-            {{ with .Params.purchase.google }}<li><a href="{{ . }}"><i class="fa fa-google"></i></a></li>{{ end }}
+            {{ with .Params.purchase.itunes }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="iTunes" title="iTunes"><i class="fa fa-apple"></i></a></li>{{ end }}
+            {{ with .Params.purchase.google }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Google Play" title="Google Play"><i class="fa fa-google"></i></a></li>{{ end }}
             {{ with .Params.purchase.spotify }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Spotify" title="Spotify"><i class="fa fa-spotify"></i></a></li>{{ end }}
+            {{ with .Params.purchase.tidal }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Tidal" title="Tidal"><i class="fa fa-music"></i></a></li>{{ end }}
+            {{ with .Params.purchase.deezer }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Deezer" title="Deezer"><i class="fa fa-headphones"></i></a></li>{{ end }}
+            {{ with .Params.purchase.youtube_music }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="YouTube Music" title="YouTube Music"><i class="fa fa-youtube-play"></i></a></li>{{ end }}
             {{ with .Params.purchase.amazon }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Amazon Music" title="Amazon Music"><i class="fa fa-amazon"></i></a></li>{{ end }}
           </ul>
       </div>
