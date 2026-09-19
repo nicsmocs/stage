@@ -94,7 +94,7 @@
         {{ with .Site.Params.navbar.events }}<li><a href="{{ . | relLangURL }}">{{ i18n "nav_events" }}</a></li>{{ end }}
       </ul>
       <ul class="nav navbar-nav navbar-right language-switcher">
-        {{ range .Translations }}<li><a href="{{ .RelPermalink }}">{{ .Language.Locale | upper }}</a></li>{{ end }}
+        {{ range .Translations }}<li><a href="{{ .RelPermalink }}">{{ .Language.Lang | upper }}</a></li>{{ end }}
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {{ with .Site.Params.social.instagram }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>{{ end }}
