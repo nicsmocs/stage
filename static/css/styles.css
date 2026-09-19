@@ -8198,11 +8198,13 @@ button.close {
 /* line 1, ../sass/_cover-page.scss */
 #cover-page {
   display: table;
-  height: 100%;
   width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
   background-size: cover;
-  background-position: 0px 0px;
-  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
   color: #fff;
 }
 /* line 9, ../sass/_cover-page.scss */
@@ -8210,6 +8212,19 @@ button.close {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
+}
+
+@supports (-webkit-touch-callout: none) {
+  #cover-page {
+    min-height: -webkit-fill-available;
+  }
+}
+
+@media (max-width: 768px) {
+  #cover-page {
+    background-position: center top;
+    background-attachment: scroll;
+  }
 }
 
 /* line 16, ../sass/_cover-page.scss */

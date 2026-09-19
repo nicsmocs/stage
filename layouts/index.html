@@ -12,14 +12,24 @@
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
-      height: 100vh; /* Exakte 100% der Viewport-Höhe */
+      background-attachment: scroll;
+      min-height: 100vh;
+      min-height: 100svh;
+      height: 100vh;
     }
 
     /* Smartphone-Hintergrund (bis 768px Displaybreite) */
     @media (max-width: 768px) {
       #cover-page {
         background-image: url('{{ $coverMobile }}') !important;
-        background-position: center top; /* Richtet Hochkant-Bilder oben/mittig aus */
+        background-position: center top;
+        background-attachment: scroll;
+      }
+    }
+
+    @supports (-webkit-touch-callout: none) {
+      #cover-page {
+        min-height: -webkit-fill-available;
       }
     }
   </style>
