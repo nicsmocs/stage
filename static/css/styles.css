@@ -8612,3 +8612,22 @@ pre code {
 .event-description {
   margin-bottom: 2em;
 }
+
+.article-content img,
+.article-content p > img,
+.article-content figure img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5em 0;
+  float: none;
+}
+
+.article-content figure {
+  margin: 1.5em 0;
+}
+
+.article-content p {
+  overflow: hidden;
+}

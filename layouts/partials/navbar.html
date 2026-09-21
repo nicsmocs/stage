@@ -34,32 +34,59 @@
     color: #333 !important;
   }
 
+  .navbar-right.social-icons {
+    margin-left: 0;
+  }
+
+  .navbar-right.social-icons > li {
+    float: left;
+  }
+
+  .navbar-right.social-icons > li > a {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  @media (max-width: 980px) {
+    .social-icon--deezer {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .social-icon--tidal {
+      display: none !important;
+    }
+  }
+
   @media (max-width: 767px) {
     /* Eingeklapptes Menü auf Smartphones dunkel/transparent halten */
     .navbar-default .navbar-collapse,
     .navbar-default .navbar-form {
-      background-color: rgba(0, 0, 0, 0.9) !important; /* Dunkler transparenter Hintergrund für bessere Lesbarkeit */
+      background-color: rgba(0, 0, 0, 0.9) !important;
       border-color: transparent !important;
     }
-    
+
     /* Textfarben der Links auf Mobilgeräten */
     .navbar-default .navbar-nav > li > a {
       color: #fff !important;
     }
 
-    /* Burger-Button (Drei Striche) Styles */
+    /* Burger-Button auf weißem Hintergrund dunkel sichtbar */
     .navbar-default .navbar-toggle {
-      border-color: #fff !important;
-      background-color: transparent !important;
+      border-color: #111 !important;
+      background-color: rgba(17, 17, 17, 0.92) !important;
+      box-shadow: 0 0 0 1px rgba(17, 17, 17, 0.08);
     }
     .navbar-default .navbar-toggle:hover,
     .navbar-default .navbar-toggle:focus {
-      background-color: rgba(255, 255, 255, 0.1) !important;
+      background-color: rgba(17, 17, 17, 1) !important;
     }
     .navbar-default .navbar-toggle .icon-bar {
       background-color: #fff !important;
     }
   }
+
 </style>
 
 <div class="navbar navbar-default navbar-fixed-top navbar-theme-{{ $navbarTheme }}" role="navigation">
@@ -96,17 +123,17 @@
       <ul class="nav navbar-nav navbar-right language-switcher">
         {{ range .Translations }}<li><a href="{{ .RelPermalink }}">{{ .Language.Lang | upper }}</a></li>{{ end }}
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        {{ with .Site.Params.social.instagram }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>{{ end }}
-        {{ with .Site.Params.social.spotify }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Spotify" title="Spotify"><i class="fa fa-spotify"></i></a></li>{{ end }}
-        {{ with .Site.Params.social.tidal }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Tidal" title="Tidal"><i class="fa fa-music"></i></a></li>{{ end }}
-        {{ with .Site.Params.social.deezer }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Deezer" title="Deezer"><i class="fa fa-headphones"></i></a></li>{{ end }}
-        {{ with .Site.Params.social.youtube_music }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="YouTube Music" title="YouTube Music"><i class="fa fa-youtube-play"></i></a></li>{{ end }}
-        {{ with .Site.Params.social.amazon }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Amazon Music" title="Amazon Music"><i class="fa fa-amazon"></i></a></li>{{ end }}
-        {{ with .Site.Params.social.youtube }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><i class="fa fa-youtube"></i></a></li>{{ end }}
-        {{ with .Site.Params.social.itunes }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="iTunes" title="iTunes"><i class="fa fa-apple"></i></a></li>{{ end }}
-        {{ with .Site.Params.social.facebook }}<li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>{{ end }}
-        {{ with .Site.Params.social.contact }}<li><a href="{{ . }}" aria-label="Booking per E-Mail" title="Booking per E-Mail"><i class="fa fa-envelope"></i></a></li>{{ end }}
+      <ul class="nav navbar-nav navbar-right social-icons">
+        {{ with .Site.Params.social.instagram }}<li class="social-icon social-icon--instagram"><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>{{ end }}
+        {{ with .Site.Params.social.spotify }}<li class="social-icon social-icon--spotify"><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Spotify" title="Spotify"><i class="fa fa-spotify"></i></a></li>{{ end }}
+        {{ with .Site.Params.social.tidal }}<li class="social-icon social-icon--tidal"><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Tidal" title="Tidal"><i class="fa fa-music"></i></a></li>{{ end }}
+        {{ with .Site.Params.social.deezer }}<li class="social-icon social-icon--deezer"><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Deezer" title="Deezer"><i class="fa fa-headphones"></i></a></li>{{ end }}
+        {{ with .Site.Params.social.youtube_music }}<li class="social-icon social-icon--youtube-music"><a href="{{ . }}" target="_blank" rel="noopener" aria-label="YouTube Music" title="YouTube Music"><i class="fa fa-youtube-play"></i></a></li>{{ end }}
+        {{ with .Site.Params.social.amazon }}<li class="social-icon social-icon--amazon"><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Amazon Music" title="Amazon Music"><i class="fa fa-amazon"></i></a></li>{{ end }}
+        {{ with .Site.Params.social.youtube }}<li class="social-icon social-icon--youtube"><a href="{{ . }}" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><i class="fa fa-youtube"></i></a></li>{{ end }}
+        {{ with .Site.Params.social.itunes }}<li class="social-icon social-icon--itunes"><a href="{{ . }}" target="_blank" rel="noopener" aria-label="iTunes" title="iTunes"><i class="fa fa-apple"></i></a></li>{{ end }}
+        {{ with .Site.Params.social.facebook }}<li class="social-icon social-icon--facebook"><a href="{{ . }}" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>{{ end }}
+        {{ with .Site.Params.social.contact }}<li class="social-icon social-icon--contact"><a href="{{ . }}" aria-label="Booking per E-Mail" title="Booking per E-Mail"><i class="fa fa-envelope"></i></a></li>{{ end }}
       </ul>
     </div><!--/.nav-collapse -->
   </div>
