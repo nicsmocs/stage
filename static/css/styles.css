@@ -8631,3 +8631,14 @@ pre code {
 .article-content p {
   overflow: hidden;
 }
+
+@media (max-width: 767px) {
+  .article-content img,
+  .article-content p > img,
+  .article-content figure img {
+    width: calc(100vw - 32px);
+    max-width: calc(100vw - 32px);
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
